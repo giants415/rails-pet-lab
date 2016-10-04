@@ -7,9 +7,12 @@ class Owner < ActiveRecord::Base
 
   before_save :normalize_phone_number
 
-  # removes leading 1 and the characters (, ), -, .
+  # gsub selector syntax?
   def normalize_phone_number
-    # stretch
+    if phone.present?
+      phone.gsub!(/^1/, "")
+      phone.gsub!(/[()-.]/,"")
+    end
   end
 
 end
